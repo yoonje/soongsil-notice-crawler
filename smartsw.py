@@ -28,8 +28,9 @@ def parse_page(idx):
 
 if __name__ == '__main__':
     notice_list = []
-    for i in range(1, constants.PAGE_NUM+1):
+    for i in range(1, constants.SMART_PAGE_NUM+1):
         notice_list.extend(parse_page(i))
+    #  pprint.pprint(notice_list)
 
     with open('smart.json', 'w') as fp:
-        json.dump(notice_list, fp, ensure_ascii=False)
+        fp.write(json.dumps(notice_list, ensure_ascii=False, indent=2))
