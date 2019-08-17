@@ -3,6 +3,9 @@
 
 ### Version
 - Python: 3.7.4
+- beautifulsoup4 4.8.0
+- requests 2.22.0
+- lxml 4.4.1
 
 ### Installation
 
