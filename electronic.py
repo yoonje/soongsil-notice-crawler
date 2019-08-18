@@ -14,7 +14,7 @@ def parse_page(idx):
         for item in items:
             parse_item = dict()
             parse_item["title"] = item.find("span", {'class': 'subject ntc'}).text
-            parse_item["link"] = "http://infocom.ssu.ac.kr" + item["onclick"][8:-3]
+            parse_item["link"] = "http://infocom.ssu.ac.kr" + item["onclick"][8:-3]  # you can use regex expression
             page_notice_list.append(parse_item)
         items = bs.find_all("div", {'class': 'list'})
         for item in items:
