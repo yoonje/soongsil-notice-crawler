@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
-import constants
+from parsers import constants
 import requests
-import pprint
 import json
 
 
