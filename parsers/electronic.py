@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-from parsers import constants
 import requests
-import json
 
 
 def parse_page(idx):
@@ -13,30 +11,29 @@ def parse_page(idx):
         for item in items:
             parse_item = dict()
             parse_item["title"] = item.find("span", {'class': 'subject ntc'}).text
-            parse_item["link"] = "http://infocom.ssu.ac.kr" + item["onclick"][8:-3]  # you can use regex expression
+            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])  # you can use regex expression
             page_notice_list.append(parse_item)
         items = bs.find_all("div", {'class': 'list'})
         for item in items:
             parse_item = dict()
             parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr" + item["onclick"][8:-3]
+            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
             page_notice_list.append(parse_item)
     else:
         items = bs.find_all("div", {'class': 'list'})
         for item in items:
             parse_item = dict()
             parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr" + item["onclick"][8:-3]
+            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
             page_notice_list.append(parse_item)
 
     return page_notice_list
 
 
-if __name__ == '__main__':
-    notice_list = []
-    for i in range(1, constants.ELECTRONIC_PAGE_NUM):
-        notice_list.extend(parse_page(i))
-    #  pprint.pprint(notice_list)
+def get_notices(max_page=6):
+    notices = []
+    for i in range(1, max_page):
+        notices.extend(parse_page(i))
 
-    with open('Electronic/electronic.json', 'w') as fp:
-        fp.write(json.dumps(notice_list, ensure_ascii=False, indent=2))
+    return notices
+
