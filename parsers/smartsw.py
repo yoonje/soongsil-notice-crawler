@@ -9,12 +9,11 @@ def parse_page(idx):
     ret = []
     for tr in trs:
         parsed_item = dict()
-        # print(item.find('a'))
         tds = tr.findAll('td')
         if tds:
             parsed_item["title"] = tds[0].text.strip()
             parsed_item["link"] = "http://smartsw.ssu.ac.kr{}".format(tds[0].find('a')['href'])
-            parsed_item["date"] = tds[2].text
+            #parsed_item["date"] = tds[2].text
             ret.append(parsed_item)
 
     return ret
