@@ -9,22 +9,28 @@ def parse_page(idx):
     if idx == 1:
         items = bs.find_all("div", {'class': 'list notice'})
         for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject ntc'}).text
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])  # you can use regex expression
+            parse_item = {
+                "title": item.find("span", {'class': 'subject ntc'}).text,
+                "link": "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3]),
+                "date": item.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
         items = bs.find_all("div", {'class': 'list'})
         for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
+            parse_item = {
+                "title": item.find("span", {'class': 'subject'}).get_text(),
+                "link": "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3]),
+                "date": item.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
     else:
         items = bs.find_all("div", {'class': 'list'})
         for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
+            parse_item = {
+                "title": item.find("span", {'class': 'subject'}).get_text(),
+                "link": "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3]),
+                "date": item.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
 
     return page_notice_list
