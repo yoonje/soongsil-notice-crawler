@@ -7,25 +7,34 @@ def parse_page(idx):
     bs = BeautifulSoup(html, 'html.parser')
     page_notice_list = []
     if idx == 1:
-        items = bs.find_all("div", {'class': 'list notice'})
-        for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject ntc'}).text
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(
-                item["onclick"][8:-3])  # you can use regex expression
+        notices = bs.find_all("div", {'class': 'list notice'})
+        for notice in notices:
+            parse_item = {
+                "title": notice.find("span", {'class': 'subject ntc'}).text,
+                "link": "http://infocom.ssu.ac.kr{}".format(notice["onclick"][8:-3]),
+                "date": notice.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
-        items = bs.find_all("div", {'class': 'list'})
-        for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
+        informs = bs.find_all("div", {'class': 'list'})
+        for inform in informs:
+            if 'notice' in inform.attrs['class']:
+                continue
+            parse_item = {
+                "title": inform.find("span", {'class': 'subject'}).get_text(),
+                "link": "http://infocom.ssu.ac.kr{}".format(inform["onclick"][8:-3]),
+                "date": inform.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
     else:
-        items = bs.find_all("div", {'class': 'list'})
-        for item in items:
-            parse_item = dict()
-            parse_item["title"] = item.find("span", {'class': 'subject'}).get_text()
-            parse_item["link"] = "http://infocom.ssu.ac.kr{}".format(item["onclick"][8:-3])
+        informs = bs.find_all("div", {'class': 'list'})
+        for inform in informs:
+            if 'notice' in inform.attrs['class']:
+                continue
+            parse_item = {
+                "title": inform.find("span", {'class': 'subject'}).get_text(),
+                "link": "http://infocom.ssu.ac.kr{}".format(inform["onclick"][8:-3]),
+                "date": inform.find("div", {'class': 'info'}).text.split('|')[1].strip(),
+            }
             page_notice_list.append(parse_item)
 
     return page_notice_list
