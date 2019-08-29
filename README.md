@@ -9,4 +9,6 @@ $ sudo pip install -r requirements.txt
 
 ### Run
 
+```sh
 python ./run.py
+```
