@@ -7,6 +7,7 @@ if __name__ == '__main__':
     cse = parsers.cse.get_notices(parsers.constants.CSE_PAGE_NUM)
     media = parsers.media.get_notices(parsers.constants.MEDIA_PAGE_NUM)
 
+
     parsers.utils.save_json('./data', 'smart.json', smartsw)
     parsers.utils.save_json('./data', 'electronic.json', electronic)
     parsers.utils.save_json('./data', 'sw.json', sw)
