@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+from .constants import headers
 
 
 def parse_page(idx):
-    html = requests.get("http://smartsw.ssu.ac.kr/board/notice/{}".format(idx)).text
+    html = requests.get("http://smartsw.ssu.ac.kr/board/notice/{}".format(idx), headers=headers).text
     bs = BeautifulSoup(html, 'html.parser')
     trs = bs.find_all("tr")
     ret = []

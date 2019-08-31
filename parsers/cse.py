@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+from .constants import headers
 
 
 def parse_page(idx):
-    html = requests.get("http://cse.ssu.ac.kr/03_sub/01_sub.htm?page={}".format(idx)).text
+    html = requests.get("http://cse.ssu.ac.kr/03_sub/01_sub.htm?page={}".format(idx), headers=headers).text
     bs = BeautifulSoup(html, 'lxml')
     bbs_list = bs.find('div', {'class': 'bbs_list'})
     ret_list = []

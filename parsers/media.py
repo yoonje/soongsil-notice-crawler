@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
-import pprint
 import re
+from .constants import headers
 
 
 def viewData(idx):
@@ -15,7 +15,7 @@ def viewData(idx):
 def parse_page(idx):
     req = requests.get(
         "http://media.ssu.ac.kr/sub.php?code=XxH00AXY&mode=&category=1&searchType=&search=&orderType=&orderBy=&page={}".format(
-            idx))
+            idx), headers=headers)
     req.encoding = "utf-8"
     html = req.text
     bs = BeautifulSoup(html, 'html.parser')
