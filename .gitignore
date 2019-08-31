@@ -128,3 +128,6 @@ dmypy.json
 
 # MAC
 .DS_Store
+
+# data dir
+data/
