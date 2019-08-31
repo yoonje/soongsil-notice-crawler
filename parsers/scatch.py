@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+from .constants import headers
 
 
 def parse_page(idx):
-    html = requests.get("http://scatch.ssu.ac.kr/공지사항/page/{}/".format(idx)).text
+    html = requests.get("http://scatch.ssu.ac.kr/공지사항/page/{}/".format(idx), headers=headers).text
     bs = BeautifulSoup(html, 'lxml')
     bbs_list = bs.find('ul', {'class': 'notice-lists'})
     ret_list = []

@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
+from .constants import headers
 
 
 def parse_page(idx):
-    html = requests.get("http://infocom.ssu.ac.kr/rb/?c=2/38&p={}".format(idx)).text
+    html = requests.get("http://infocom.ssu.ac.kr/rb/?c=2/38&p={}".format(idx), headers=headers).text
     bs = BeautifulSoup(html, 'html.parser')
     page_notice_list = []
     if idx == 1:
