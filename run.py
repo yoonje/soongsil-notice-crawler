@@ -1,3 +1,4 @@
+#!/home/ubuntu/soongsil-notice-crawler/venv/bin/python3
 import parsers
 
 if __name__ == '__main__':
