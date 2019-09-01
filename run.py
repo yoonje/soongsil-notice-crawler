@@ -1,5 +1,5 @@
-#!/home/ubuntu/soongsil-notice-crawler/venv/bin/python3
 import parsers
+import pprint
 
 if __name__ == '__main__':
     smartsw = parsers.smartsw.get_notices(parsers.constants.SMART_PAGE_NUM)
@@ -8,6 +8,9 @@ if __name__ == '__main__':
     cse = parsers.cse.get_notices(parsers.constants.CSE_PAGE_NUM)
     media = parsers.media.get_notices(parsers.constants.MEDIA_PAGE_NUM)
     scatch = parsers.scatch.get_notices(parsers.constants.SCATCH_PAGE_NUM)
+    business = parsers.business.get_notices(parsers.constants.BUSINESS_PAGE_NUM)
+
+    pprint.pprint(business)
 
     parsers.utils.save_json('./data', 'smart.json', smartsw)
     parsers.utils.save_json('./data', 'smart-head.json', smartsw[:7])
@@ -21,3 +24,5 @@ if __name__ == '__main__':
     parsers.utils.save_json('./data', 'media-head.json', media[:7])
     parsers.utils.save_json('./data', 'scatch.json', scatch)
     parsers.utils.save_json('./data', 'scatch-head.json', scatch[:7])
+    parsers.utils.save_json('./data', 'business.json', business)
+    parsers.utils.save_json('./data', 'business-head.json', business[:7])

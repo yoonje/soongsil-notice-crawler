@@ -4,6 +4,7 @@ SW_PAGE_NUM = 5
 CSE_PAGE_NUM = 5
 MEDIA_PAGE_NUM = 4
 SCATCH_PAGE_NUM = 21
+BUSINESS_PAGE_NUM = 7
 
 headers = {
     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6)" \
