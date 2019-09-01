@@ -7,18 +7,17 @@ import pprint
 def parse_page(idx):
     html = requests.get("http://biz.ssu.ac.kr/bbs/list.do?&bId=BBS_03_NOTICE&sc_title=&page={}".format(idx),
                         headers=headers).text
-    bs = BeautifulSoup(html, 'html.parser')
+    bs = BeautifulSoup(html, 'lxml')
     bList = bs.find("ul", {"id": "bList01"})
-    divs = bList.find_all("div")
+    lis = bList.find_all("li")
     ret = []
-    i = 0
-    while i < len(divs) - 2:
-        parsed_item = dict()
-        parsed_item["title"] = divs[i].text.strip()
-        parsed_item["link"] = "http://biz.ssu.ac.kr{}".format(divs[i].find('a')['href'])
-        parsed_item["date"] = divs[i + 1].find("span").text[0:10]
-        ret.append(parsed_item)
-        i = i + 3
+    for li in lis:
+        title = li.find('a')
+        ret.append({
+            "link": "http://biz.ssu.ac.kr{}".format(title['href']),
+            "title": title.text.strip(),
+            "date": li.find('span').text.split('/')[0].strip(),
+        })
 
     return ret
 
