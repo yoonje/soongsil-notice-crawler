@@ -10,5 +10,5 @@ $ sudo pip install -r requirements.txt
 ### Run
 
 ```sh
-python ./run.py
+python3 run.py
 ```
